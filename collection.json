@@ -1,0 +1,266 @@
+{
+  "info": {
+    "_postman_id": "d4f7a5c1-2e6b-4a82-9c31-7b0e5d1a2026",
+    "name": "Daily Diet API",
+    "description": "Coleção para testar a API do projeto acadêmico Daily Diet. Backend local padrão: http://localhost:3333. Faça login ou cadastro antes de testar as rotas protegidas. O token retornado é salvo automaticamente na variável de coleção 'token'.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3333"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "mealId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Cadastrar usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Usuário Teste\",\n  \"login\": \"usuario_teste\",\n  \"senha\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/users/register",
+            "description": "Cria um usuário. Troque o login se ele já estiver cadastrado. O token é salvo automaticamente quando o cadastro funciona."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.token) pm.collectionVariables.set('token', data.token);",
+                  "  if (data.usuario && data.usuario.id) pm.collectionVariables.set('userId', String(data.usuario.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"Maria\",\n  \"senha\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/users/login",
+            "description": "Usa por padrão a conta de demonstração Maria / 123456. Se essa conta não existir no banco da instalação atual, cadastre um usuário primeiro."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.token) pm.collectionVariables.set('token', data.token);",
+                  "  if (data.usuario && data.usuario.id) pm.collectionVariables.set('userId', String(data.usuario.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users/logout",
+            "description": "Encerra a sessão atual."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) pm.collectionVariables.set('token', '');"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Refeições",
+      "item": [
+        {
+          "name": "Cadastrar refeição",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Almoço\",\n  \"descricao\": \"Arroz, feijão, frango e salada\",\n  \"data\": \"2026-10-24\",\n  \"hora\": \"12:30\",\n  \"dentroDaDieta\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/meals",
+            "description": "Requer login. Se seu controller usar outro formato para data, hora ou dentroDaDieta, ajuste o corpo conforme a implementação."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201 || pm.response.code === 200) {",
+                  "  try { const data = pm.response.json(); if (data.id) pm.collectionVariables.set('mealId', String(data.id)); else if (data.refeicao && data.refeicao.id) pm.collectionVariables.set('mealId', String(data.refeicao.id)); } catch (e) {}",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar refeições",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/meals"
+          }
+        },
+        {
+          "name": "Listar todas as refeições do usuário",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/meals/all"
+          }
+        },
+        {
+          "name": "Consultar métricas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/meals/metrics"
+          }
+        },
+        {
+          "name": "Consultar refeição por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/meals/{{mealId}}"
+          }
+        },
+        {
+          "name": "Editar refeição",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Almoço atualizado\",\n  \"descricao\": \"Frango grelhado, arroz integral e salada\",\n  \"data\": \"2026-10-24\",\n  \"hora\": \"13:00\",\n  \"dentroDaDieta\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/meals/{{mealId}}"
+          }
+        },
+        {
+          "name": "Excluir refeição",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/meals/{{mealId}}"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,693 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f7f5;
+  color: #26352d;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.aplicacao {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+/* Cabeçalho */
+
+.cabecalho {
+  padding: 30px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: #176b45;
+  color: #ffffff;
+}
+
+.cabecalho h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.subtitulo {
+  margin: 10px 0 0;
+  color: #e0f2e8;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cabecalho-logado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.usuario-logado span {
+  color: #e0f2e8;
+}
+
+.botao-sair {
+  min-height: 40px;
+  padding: 9px 16px;
+  border: 1px solid #ffffff;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #176b45;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.botao-sair:hover {
+  background: #edf6ef;
+}
+
+/* Seções */
+
+.secao {
+  padding: 25px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-secao {
+  margin: 0 0 20px;
+  color: #176b45;
+  font-size: 22px;
+}
+
+.texto-auxiliar {
+  margin: -10px 0 20px;
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Campos */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.campo label {
+  color: #34483b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d4ded7;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #26352d;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: #208557;
+  box-shadow: 0 0 0 3px rgba(32, 133, 87, 0.12);
+}
+
+.campo textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* Botões */
+
+.botao-principal,
+.botao-secundario,
+.botao-editar,
+.botao-excluir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.botao-principal {
+  background: #176b45;
+  color: #ffffff;
+}
+
+.botao-principal:hover {
+  background: #105637;
+}
+
+.botao-secundario {
+  background: #ffffff;
+  color: #176b45;
+  border-color: #176b45;
+}
+
+.botao-secundario:hover {
+  background: #edf6ef;
+}
+
+.botao-editar {
+  min-height: 34px;
+  padding: 7px 11px;
+  background: #e7f0ff;
+  color: #2459a9;
+}
+
+.botao-editar:hover {
+  background: #d5e5ff;
+}
+
+.botao-excluir {
+  min-height: 34px;
+  padding: 7px 11px;
+  background: #fff0f0;
+  color: #b42323;
+}
+
+.botao-excluir:hover {
+  background: #ffe0e0;
+}
+
+/* Métricas */
+
+.grade-metricas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cartao-metrica {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 115px;
+  padding: 20px;
+  border: 1px solid #e0eee4;
+  border-radius: 10px;
+  background: #f2f8f4;
+}
+
+.cartao-metrica span {
+  color: #52675a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.cartao-metrica strong {
+  color: #176b45;
+  font-size: 29px;
+}
+
+/* Formulário de refeições */
+
+#formulario-refeicao {
+  scroll-margin-top: 20px;
+}
+
+.cabecalho-formulario-refeicao {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.campo-descricao,
+.botoes-formulario {
+  grid-column: 1 / -1;
+}
+
+.botoes-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Histórico */
+
+.titulo-historico {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.titulo-historico .titulo-secao {
+  margin-bottom: 6px;
+}
+
+.contador-registros {
+  margin: 0;
+  color: #718078;
+  font-size: 14px;
+}
+
+/* Filtros */
+
+.filtros-historico {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 22px;
+  border: 1px solid #e4ebe5;
+  border-radius: 10px;
+  background: #f7f9f7;
+}
+
+.botoes-filtro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tabela */
+
+.tabela-responsiva {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e9e3;
+  border-radius: 9px;
+}
+
+.tabela-refeicoes {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabela-refeicoes thead {
+  background: #eaf3ed;
+}
+
+.tabela-refeicoes th {
+  padding: 15px 13px;
+  color: #24583b;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tabela-refeicoes td {
+  padding: 15px 13px;
+  border-top: 1px solid #e9eeea;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.tabela-refeicoes tbody tr:hover {
+  background: #fafcfb;
+}
+
+.id-tabela {
+  display: block;
+  margin-bottom: 5px;
+  color: #849188;
+  font-size: 11px;
+}
+
+.tabela-refeicoes td strong {
+  color: #26352d;
+}
+
+.descricao-tabela {
+  min-width: 180px;
+  max-width: 280px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Status da dieta */
+
+.etiqueta-dieta {
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.etiqueta-dentro {
+  background: #e0f5e7;
+  color: #16703d;
+}
+
+.etiqueta-fora {
+  background: #fff0e5;
+  color: #a94b12;
+}
+
+/* Ações da tabela */
+
+.acoes-tabela {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.historico-vazio {
+  padding: 35px 15px !important;
+  text-align: center;
+  color: #718078;
+}
+
+/* Mensagens */
+
+.mensagem {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  max-width: calc(100% - 32px);
+  padding: 15px 18px;
+  border-radius: 8px;
+  background: #176b45;
+  color: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+}
+
+.mensagem button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 23px;
+  line-height: 1;
+}
+
+/* Rodapé */
+
+.rodape {
+  padding: 12px 0 20px;
+  color: #78867c;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Tela de login e cadastro */
+
+.tela-autenticacao {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f4f7f5;
+}
+
+.cartao-autenticacao {
+  width: 100%;
+  max-width: 440px;
+  padding: 30px;
+  border: 1px solid #e2e9e3;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.marca-autenticacao {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.icone-alimentacao {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  border-radius: 18px;
+  background: #176b45;
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.marca-autenticacao h1 {
+  margin: 0;
+  color: #176b45;
+  font-size: 32px;
+}
+
+.marca-autenticacao p {
+  margin: 10px 0 0;
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Abas de login e cadastro */
+
+.abas-autenticacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 5px;
+  margin-bottom: 22px;
+  border-radius: 8px;
+  background: #f0f4f1;
+}
+
+.abas-autenticacao button {
+  padding: 11px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #52675a;
+  font-weight: 600;
+}
+
+.abas-autenticacao button.aba-ativa {
+  background: #176b45;
+  color: #ffffff;
+}
+
+/* Formulário de autenticação */
+
+.formulario-autenticacao {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.botao-autenticacao {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Mensagem na tela de autenticação */
+
+.mensagem-autenticacao {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  margin-top: 16px;
+  border-radius: 7px;
+  background: #fff0f0;
+  color: #a52222;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mensagem-autenticacao button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #a52222;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.rodape-autenticacao {
+  margin: 22px 0 0;
+  color: #718078;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Tablets */
+
+@media (max-width: 1000px) {
+  .aplicacao {
+    padding: 20px;
+  }
+
+  .grade-metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filtros-historico {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tabela-refeicoes {
+    min-width: 950px;
+  }
+}
+
+/* Celulares */
+
+@media (max-width: 600px) {
+  .aplicacao {
+    padding: 12px;
+  }
+
+  .cabecalho {
+    padding: 22px;
+  }
+
+  .cabecalho h1 {
+    font-size: 27px;
+  }
+
+  .cabecalho-logado {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .usuario-logado {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .secao {
+    padding: 17px;
+    margin-bottom: 16px;
+  }
+
+  .titulo-secao {
+    font-size: 20px;
+  }
+
+  .formulario {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .campo-descricao,
+  .botoes-formulario {
+    grid-column: auto;
+  }
+
+  .grade-metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .cartao-metrica {
+    min-height: 100px;
+    padding: 13px;
+  }
+
+  .cartao-metrica strong {
+    font-size: 25px;
+  }
+
+  .filtros-historico {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+  }
+
+  .titulo-historico {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .titulo-historico > button {
+    width: 100%;
+  }
+
+  .cabecalho-formulario-refeicao {
+    flex-direction: column;
+  }
+
+  .botoes-formulario {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .botoes-formulario button {
+    width: 100%;
+  }
+
+  .mensagem {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .cartao-autenticacao {
+    padding: 22px;
+  }
+
+  .tela-autenticacao {
+    padding: 14px;
+  }
+}
